@@ -19,17 +19,6 @@ function characters() {
             if (this.status == 200) {
                 var results = JSON.parse(this.responseText);
                 var characterSection = document.getElementById('characterSection');
-                // var characterName = results["data"].results[0].name;
-                // console.log(results["data"]);
-                // console.log(characterAttributes.comics.items[0].name);
-                // console.log(results["data"].results[0].thumbnail);
-                // console.log(results["data"].results[0].thumbnail["path"]);
-                // console.log(results["data"].results[0].thumbnail["extension"]);
-
-                // 
-                // console.log(results["data"].count);
-                // console.log(results.hasOwnProperty('data'));
-                // console.log(results["data"].results[0].name);
 
                 if (results["data"].count === 0) {
                     document.getElementById("characterCard").style.borderStyle = "hidden";
@@ -200,8 +189,3 @@ function comics(characterID) {
 
     xhr.send();
 }
-// else if(window.location.pathname === '/comics.php') {
-
-// } else {
-//     console.log(window.location.pathname + ' ... Does not exist.');
-// }

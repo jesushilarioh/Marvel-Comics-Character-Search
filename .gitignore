@@ -150,5 +150,6 @@ typings/
 
 # End of https://www.gitignore.io/api/osx,node,sass,macos,visualstudiocode
 
+/connections
 /connection.php
 /php.ini
