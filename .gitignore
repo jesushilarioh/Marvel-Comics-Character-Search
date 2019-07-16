@@ -149,7 +149,7 @@ typings/
 .history
 
 # End of https://www.gitignore.io/api/osx,node,sass,macos,visualstudiocode
-
+/connection
 /connections
 /connection.php
 /php.ini

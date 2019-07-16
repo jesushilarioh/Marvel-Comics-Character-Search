@@ -1,5 +1,3 @@
-var characterID = 0;
-
 function characters() {
     document.getElementById("characterCard").style.borderStyle = "hidden";
 
@@ -9,16 +7,46 @@ function characters() {
     function connection(e) {
         e.preventDefault();
 
+        document.getElementById("characterCard").style.borderStyle = "hidden";
+
+        document.getElementById('characterImage')
+            .innerHTML = '';
+
+        document.getElementById('characterName')
+            .innerHTML = '';
+
+        document.getElementById('characterDescription')
+            .innerText = '';
+
+        document.getElementById("comicsAvailable")
+            .innerText = '';
+
+        document.getElementById('characterInfoAttribution')
+            .innerText = '';
+
+        document.getElementById('comicSection').innerHTML = '';
+
         var xhr = new XMLHttpRequest();
         var name = document.getElementById('name').value;
         var params = "name=" + name;
 
-        xhr.open('GET', 'connection.php?' + params, true);
+        xhr.open('GET', '/connections/name-search.php?' + params, true);
+
+        xhr.onloadstart = function() {
+            document.getElementById('characterSpinnerSection')
+                    .innerHTML =
+                    '<strong id="spinnerText">Loading character...</strong>' +
+                    '<div class="spinner-border ml-auto" role="status" ' +
+                    'aria-hidden="true" id="spinner"></div>';
+        }
+    
+        xhr.onloadend = function() {
+            document.getElementById('characterSpinnerSection').innerHTML = '';
+        }
 
         xhr.onload = function () {
             if (this.status == 200) {
                 var results = JSON.parse(this.responseText);
-                var characterSection = document.getElementById('characterSection');
 
                 if (results["data"].count === 0) {
                     document.getElementById("characterCard").style.borderStyle = "hidden";
@@ -43,7 +71,7 @@ function characters() {
                     document.getElementById("characterCard").style.borderStyle = "solid";
 
                     var characterAttributes = results["data"].results[0];
-                    characterID = results["data"].results[0].id;
+                    var characterID = results["data"].results[0].id;
                     var output = '';
 
                     output =
@@ -91,16 +119,25 @@ function characters() {
         xhr.send();
     }
 }
-// if (window.location.pathname === '/' || 
-//     window.location.pathname === '/index.php') {
 
-// } 
 
 function comics(characterID) {
 
     var xhr = new XMLHttpRequest();
 
-    xhr.open('GET', 'connection.php?character-id=' + characterID, true);
+    xhr.open('GET', '/connections/character.php?character-id=' + characterID, true);
+
+    xhr.onloadstart = function() {
+        document.getElementById('comicsSpinnerSection')
+                .innerHTML =
+                '<strong id="spinnerText" class="text-danger">Loading comics below...</strong>' +
+                '<div class="spinner-border text-danger ml-auto" role="status" ' +
+                'aria-hidden="true" id="spinner"></div>';
+    }
+
+    xhr.onloadend = function() {
+        document.getElementById('comicsSpinnerSection').innerHTML = '';
+    }
 
     xhr.onload = function () {
         if (this.status === 200) {
@@ -135,13 +172,13 @@ function comics(characterID) {
                             '<h5 class="card-title">' + comic.title + '</h5>';
 
                         if (comic.description != null) {
-                            output += '<p style="font-size: 12px;" class="card-text text-muted">' +
+                            output += '<p style="font-size: 12px;" class="card-text">' +
                                 comic.description +
                                 '</p>';
                         }
 
 
-                        output += '<p style="font-size: 12px;" class="card-text">Characters: ';
+                        output += '<p style="font-size: 12px;" class="card-text text-muted">Characters: ';
 
                         for (const k in comic.characters.items) {
                             if (comic.characters.items.hasOwnProperty(k)) {
@@ -151,7 +188,7 @@ function comics(characterID) {
                         }
 
                         output += '</p>';
-                        output += '<p style="font-size: 12px;" class="card-text">Creators: ';
+                        output += '<p style="font-size: 12px;" class="card-text text-muted">Creators: ';
 
                         for (const j in comic.creators.items) {
                             if (comic.creators.items.hasOwnProperty(j)) {
