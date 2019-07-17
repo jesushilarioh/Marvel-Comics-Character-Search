@@ -7,7 +7,11 @@ function characters() {
     function connection(e) {
         e.preventDefault();
 
-        document.getElementById("characterCard").style.borderStyle = "hidden";
+        document.getElementById("characterCard")
+                .style.borderStyle = "hidden";
+
+        document.getElementById("characterMainTitle")
+                .innerHTML = '';
 
         document.getElementById('characterImage')
             .innerHTML = '';
@@ -17,6 +21,12 @@ function characters() {
 
         document.getElementById('characterDescription')
             .innerText = '';
+
+        document.getElementById('characterSpinnerSection')
+            .innerHTML = '';
+
+        document.getElementById('comicsSpinnerSection')
+            .innerHTML = '';
 
         document.getElementById("comicsAvailable")
             .innerText = '';
@@ -51,6 +61,9 @@ function characters() {
                 if (results["data"].count === 0) {
                     document.getElementById("characterCard").style.borderStyle = "hidden";
 
+                    document.getElementById("characterMainTitle")
+                            .innerHTML = '';
+
                     document.getElementById('characterImage')
                         .innerHTML = '';
 
@@ -59,6 +72,12 @@ function characters() {
 
                     document.getElementById('characterDescription')
                         .innerText = '';
+
+                    document.getElementById('characterSpinnerSection')
+                        .innerHTML = '';
+
+                    document.getElementById('comicsSpinnerSection')
+                        .innerHTML = '';
 
                     document.getElementById("comicsAvailable")
                         .innerText = '';
@@ -136,7 +155,8 @@ function comics(characterID) {
     }
 
     xhr.onloadend = function() {
-        document.getElementById('comicsSpinnerSection').innerHTML = '';
+        document.getElementById('comicsSpinnerSection')
+            .innerHTML = '<strong id="spinnerText" class="text-success">Done.</strong>';
     }
 
     xhr.onload = function () {
@@ -165,9 +185,9 @@ function comics(characterID) {
 
                         output +=
                             '<div class="card">' +
-                            '<img src="' + comic.thumbnail["path"] +
+                            '<a href=""><img src="' + comic.thumbnail["path"] +
                             '.' + comic.thumbnail["extension"] +
-                            '" class="card-img-top" alt="' + comic.title + '">' +
+                            '" class="card-img-top" alt="' + comic.title + '"></a>' +
                             '<div class="card-body">' +
                             '<h5 class="card-title">' + comic.title + '</h5>';
 

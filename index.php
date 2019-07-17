@@ -33,6 +33,7 @@
         <div class="d-flex align-items-center" id="comicsSpinnerSection"></div>
 
         <section id="characterSection">
+            <h2 id="characterMainTitle"></h2>
             <div class="card flex-md-row mb-4 box-shadow h-md-250" id="characterCard">
                 <div id="characterImage"></div>
                 <div class="card-body d-flex flex-column align-items-start">
