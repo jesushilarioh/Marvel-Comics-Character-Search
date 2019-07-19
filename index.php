@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="style.css">
 
 </head>
-<body onload="characters()">
+<body onload="character()">
     <div class="jumbotron">
         <div class="container">
             <h1 class="header-main-title">Marvel Comics Character Search</h1>

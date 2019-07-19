@@ -1,4 +1,4 @@
-function characters() {
+function character() {
     document.getElementById("characterCard").style.borderStyle = "hidden";
 
     document.getElementById('connectionForm')
@@ -244,5 +244,77 @@ function comics(characterID) {
         console.log('Error onerror function.');
     }
 
+    xhr.send();
+}
+
+function singleComic() {
+    var urlQueryParameters = new URLSearchParams(window.location.search),
+        comicID = urlQueryParameters.get('comic-id');
+
+    var xhr = new XMLHttpRequest();
+
+    xhr.open('GET', '/connections/single-comic.php?comic-id=' + comicID, true);
+    xhr.onload = function() {
+        if (this.status == 200) {
+            var results = JSON.parse(this.responseText);
+                comicInfo = results["data"].results[0],
+                comicImage = comicInfo.thumbnail["path"] + '.' + comicInfo.thumbnail["extension"],
+                comicDescription = comicInfo.description,
+                comicCharacters = comicInfo.characters.items,
+                comicCreators = comicInfo.creators.items,
+                output = '',
+                singleComicContainerDiv = document.getElementById('singleComicContainerDiv');
+            
+            output += '<h1 class="header-main-title single-comic__main-title">' + comicInfo.title + '</h1>' +
+            '<div class="card mb-3">' +
+                '<div class="row no-gutters">' +
+                    '<div class="col-md-4">' +
+                        '<img src="' + comicImage + '" class="card-img" alt="...">' +
+                    '</div>' +
+                    '<div class="col-md-8">' +
+                        '<div class="card-body">' +
+                            '<h5 class="card-title">' + comicInfo.title + '</h5>' +
+                            '<p class="card-text">' + comicDescription + '</p>'+
+                            '<p class="card-text">'+
+                                '<small class="text-muted">' +
+                                ' Characters: ';
+                                for (const i in comicCharacters) {
+                                    if (comicCharacters.hasOwnProperty(i)) {
+                                        const character = comicCharacters[i];
+                                        output += '<a href="#">' + character.name + '</a>, ';
+                                    }
+                                }
+                                
+            output +=           '</small>' +
+                            '</p>' +
+                            '<p class="card-text">' +
+                                '<small class="text-muted">' +
+                                'Creators: ';
+                                for (const i in comicCreators) {
+                                    if (comicCreators.hasOwnProperty(i)) {
+                                        const creator = comicCreators[i];
+                                        output+= '<a href="#">' + creator.name + '</a>, ';
+                                    }
+                                }
+                            
+            output +=            '</small>' +
+                            '</p>' +
+                        '</div>' +
+                    '</div>' +
+                '</div>' +
+                '<div class="card-footer text-muted text-right"> ' +
+                    results["attributionText"] +
+                '</div>' +
+            '</div>';
+
+            singleComicContainerDiv.innerHTML = output;
+        }
+        else {
+            console.log('Error from onload Function...');
+        }
+    }
+    xhr.onerror = function() {
+        console.log('Error from onerror function...');
+    }
     xhr.send();
 }
