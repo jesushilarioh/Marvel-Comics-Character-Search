@@ -14,10 +14,11 @@
 </head>
 <body onload="singleComic()" class="single-comic__body">
     <div class="jumbotron">
-    <a href="/index.php">Home</a>
-    <div class="container single-comic__container" id="singleComicContainerDiv">
+        <a href="/index.php">Home</a>
+        <div class="d-flex align-items-center container" id="comicsSpinnerSection"></div>
+        <div class="container single-comic__container" id="singleComicContainerDiv">
             
-            </div>  <!-- /container -->
+        </div>  <!-- /container -->
     </div>  <!-- /jumbotron -->
     
     <script src="main.js"></script>

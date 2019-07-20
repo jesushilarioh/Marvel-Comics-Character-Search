@@ -32,20 +32,7 @@
         <div class="d-flex align-items-center" id="characterSpinnerSection"></div>
         <div class="d-flex align-items-center" id="comicsSpinnerSection"></div>
 
-        <section id="characterSection">
-            <h2 id="characterMainTitle"></h2>
-            <div class="card flex-md-row mb-4 box-shadow h-md-250" id="characterCard">
-                <div id="characterImage"></div>
-                <div class="card-body d-flex flex-column align-items-start">
-                    <h3 class="mb-0 text-dark" id="characterName"></h3>
-                    <p class="card-text" id="characterDescription"></p>
-                    <p class="text-muted mb-3" id="comicsAvailable"></p>
-                    <p class="mb-1 text-muted" id="characterInfoAttribution"></p>
-                    <!-- <a href="#comicSection">Comics</a> -->
-                </div>
-            </div>
-
-        </section>
+        <section id="characterSection"></section>
 
         <section id="comicSection"></section>
     </div>
