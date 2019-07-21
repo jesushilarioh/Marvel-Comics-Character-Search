@@ -153,7 +153,7 @@ function comics(characterID) {
 
                         output +=
                             '<div class="card">' +
-                                '<a href="/single-comic.php?comic-id=' + comic.id + '"><img src="' + comic.thumbnail["path"] +
+                                '<a href="/comic.php?comic-id=' + comic.id + '"><img src="' + comic.thumbnail["path"] +
                                 '.' + comic.thumbnail["extension"] +
                                 '" class="card-img-top" alt="' + comic.title + '"></a>' +
                                 '<div class="card-body">' +
@@ -277,8 +277,13 @@ function singleComic() {
                                 for (const i in comicCreators) {
                                     if (comicCreators.hasOwnProperty(i)) {
                                         const creator = comicCreators[i];
-                                        output+= '<a href="#">' + creator.name
-                                        .concat(' (' + creator.role + '), ') + '</a>, ';
+                                        output+= 
+                                        '<a href="/creator.php?resource-URI=' + 
+                                        creator.resourceURI + '&creator-name=' + 
+                                        creator.name + '&creator-role=' + 
+                                        creator.role + '">' + 
+                                        creator.name.concat(' (' + creator.role + '), ') + 
+                                        '</a>, ';
                                     }
                                 }
                             
@@ -302,4 +307,21 @@ function singleComic() {
         console.log('Error from onerror function...');
     }
     xhr.send();
+}
+
+function comicCreator() {
+    var urlQueryParameters = new URLSearchParams(window.location.search),
+        creatorURI = urlQueryParameters.get('resource-URI'),
+        creatorTitle = urlQueryParameters.get('creator-role'),
+        creatorName = urlQueryParameters.get('creator-name'),
+        url = new URL(creatorURI),
+        creatorID = url.pathname.substring(url.pathname.lastIndexOf('/') + 1);
+        
+        console.log(
+            creatorName + ', ' +
+            creatorID + ', ' +
+            creatorTitle
+        );
+
+
 }
