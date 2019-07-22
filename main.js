@@ -153,40 +153,40 @@ function comics(characterID) {
                                 '<div class="card-body">' +
                                     '<h5 class="card-title">' + comic.title + '</h5>';
 
-                        // if (comic.description != null) {
-                        //     output += '<p style="font-size: 12px;" class="card-text">' +
-                        //         comic.description +
-                        //         '</p>';
-                        // }
+                        if (comic.description != null) {
+                            output += '<p style="font-size: 12px;" class="card-text">' +
+                                comic.description +
+                                '</p>';
+                        }
 
 
-                        // output += '<p style="font-size: 12px;" class="card-text text-muted">Characters: ';
+                        output += '<p style="font-size: 12px;" class="card-text text-muted">Characters: ';
 
-                        // for (const k in comic.characters.items) {
-                        //     if (comic.characters.items.hasOwnProperty(k)) {
-                        //         const character = comic.characters.items[k];
-                        //         output += character.name.concat(', ');
-                        //     }
-                        // }
+                        for (const k in comic.characters.items) {
+                            if (comic.characters.items.hasOwnProperty(k)) {
+                                const character = comic.characters.items[k];
+                                output += character.name.concat(', ');
+                            }
+                        }
 
-                        // output += '</p>';
-                        // output += '<p style="font-size: 12px;" class="card-text text-muted">Creators: ';
+                        output += '</p>';
+                        output += '<p style="font-size: 12px;" class="card-text text-muted">Creators: ';
 
-                        // for (const j in comic.creators.items) {
-                        //     if (comic.creators.items.hasOwnProperty(j)) {
-                        //         const creator = comic.creators.items[j];
+                        for (const j in comic.creators.items) {
+                            if (comic.creators.items.hasOwnProperty(j)) {
+                                const creator = comic.creators.items[j];
 
-                        //         output += creator.name
-                        //             .concat(' (' + creator.role + '), ');
+                                output += creator.name
+                                    .concat(' (' + creator.role + '), ');
 
-                        //     }
-                        // }
+                            }
+                        }
 
-                        // output += '</p>';
+                        output += '</p>';
                         output+='</div>' +
-                                // '<div class="card-footer">' +
-                                //     '<small style="line-height: 1;" class="text-muted">' + results["attributionText"] + '</small>' +
-                                // '</div>' +
+                                '<div class="card-footer">' +
+                                    '<small style="line-height: 1;" class="text-muted">' + results["attributionText"] + '</small>' +
+                                '</div>' +
                             '</div>';
                     }
                 }
@@ -318,7 +318,7 @@ function comicCreator() {
         xhr.onloadstart = function() {
             document.getElementById('comicCreatorSpinnerSection')
                     .innerHTML = 
-                    '<strong id="spinnerText" class="text-secondary">Loading comic info...</strong>' +
+                    '<strong id="spinnerText" class="text-secondary">Loading creator info...</strong>' +
                     '<div class="spinner-border text-secondary ml-auto" role="status" ' +
                     'aria-hidden="true" id="spinner"></div>';
         }
@@ -332,17 +332,9 @@ function comicCreator() {
                     creatorImage = creatorInfo.thumbnail["path"] + '.' + creatorInfo.thumbnail["extension"],
                     comicCreatorContainerDiv = document.getElementById('comicCreatorContainerDiv'),
                     creatorComics = creatorInfo.comics.items;
-                    // creatorDescription = creatorInfo.description,
-                    // creatorCharacters = creatorInfo.characters.items,
-                    // creatorCreators = creatorInfo.creators.items;
-
-                console.log(creatorInfo);
-                // console.log(creatorFullName);
-                // console.log(creatorImage);
-                // console.log(creatorComics);
                 
                 output += 
-                    '<h1 class="header-main-title single-comic__main-title">' + creatorFullName + '</h1>' +
+                    '<h1 class="header-main-title single-comic__main-title">Creator</h1>' +
                     '<div class="card mb-3">' +
                         '<div class="row no-gutters">' +
                             '<div class="col-md-4">' +
@@ -374,15 +366,10 @@ function comicCreator() {
 
                     comicCreatorContainerDiv.innerHTML = output;
 
-                    var comicColumns = document.getElementById('comicColumns');
-                    //     comicParagraph = document.createElement('p');
-
                     for (const i in creatorComics) {
                         if (creatorComics.hasOwnProperty(i)) {
                             const comic = creatorComics[i];
-                            // console.log(singleComic(comic.resourceURI));
                             creatorSingleComic(comic.resourceURI);
-                            // output += '<div class="col-md-4" >' + singleComic(comic.resourceURI) + '</div>';
                         }
                     }
 
@@ -393,7 +380,7 @@ function comicCreator() {
         
         xhr.onloadend = function() {
             document.getElementById('comicCreatorSpinnerSection')
-                    .innerHTML = '<strong id="spinnerText" class="text-secondary">Done.</strong>';
+                    .innerHTML = '';
         }
         
         xhr.onerror = function() {
@@ -407,13 +394,16 @@ function comicCreator() {
 function creatorSingleComic(comicResourceURI) {
     var url = new URL(comicResourceURI),
         comicID = url.pathname.substring(url.pathname.lastIndexOf('/') + 1),
-        // output = '',
         xhr = new XMLHttpRequest();
 
         xhr.open('GET', '/connections/single-comic.php?comic-id=' + comicID, true);
         
         xhr.onloadstart = function() {
-            // console.log('onloadstart...');
+            document.getElementById('comicCreatorSpinnerSection1')
+                    .innerHTML = 
+                    '<strong id="spinnerText" class="text-secondary">Loading comics...</strong>' +
+                    '<div class="spinner-border text-secondary ml-auto" role="status" ' +
+                    'aria-hidden="true" id="spinner"></div>';
         }
         
         xhr.onload = function() {
@@ -457,7 +447,8 @@ function creatorSingleComic(comicResourceURI) {
         }
         
         xhr.onloadend = function() {
-            // console.log('onloadend...');
+            document.getElementById('comicCreatorSpinnerSection1')
+                    .innerHTML = '<strong id="spinnerText" class="text-secondary">Done.</strong>';
         }
         
         xhr.send();

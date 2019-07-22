@@ -16,6 +16,7 @@
     <div class="jumbotron">
         <a href="/index.php">Home</a>
         <div class="d-flex align-items-center container" id="comicCreatorSpinnerSection"></div>
+        <div class="d-flex align-items-center container" id="comicCreatorSpinnerSection1"></div>
         <div class="container comic-creator__container" id="comicCreatorContainerDiv">
         
         </div>  <!-- /container -->
