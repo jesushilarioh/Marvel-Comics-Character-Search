@@ -15,9 +15,9 @@
 <body onload="comicCreator()" class="comic-creator__body">
     <div class="jumbotron">
         <a href="/index.php">Home</a>
-        <div class="d-flex align-items-center container" id="comicsSpinnerSection"></div>
+        <div class="d-flex align-items-center container" id="comicCreatorSpinnerSection"></div>
         <div class="container comic-creator__container" id="comicCreatorContainerDiv">
-            
+        
         </div>  <!-- /container -->
     </div>  <!-- /jumbotron -->
     
