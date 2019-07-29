@@ -47,6 +47,10 @@ a:active {
 #characterMainTitle, #comicMainTitle {
     color: #FFFFFF;
 }
+.card {
+    border:none;
+    border-radius: 2px;
+}
 
 
 /* Single Comic Page */
