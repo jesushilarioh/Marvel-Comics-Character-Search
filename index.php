@@ -19,7 +19,7 @@
             <form id="connectionForm">
             
                 <div class="form-group">
-                    <input type="text" name="name" id="name" class="form-control character-search-box" placeholder="(Ex. Hulk, Iron Man, Spider-Man, etc...)">
+                    <input required type="text" name="name" id="name" class="form-control character-search-box" placeholder="(Ex. Hulk, Iron Man, Spider-Man, etc...)">
                 </div>
                 <input type="submit" value="Search!" class="btn btn-danger mb-2 float-right search-character-button">
 
