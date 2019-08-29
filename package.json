@@ -1,0 +1,26 @@
+{
+  "name": "marvel-comics-search-api",
+  "version": "1.0.0",
+  "description": "marvel comics api search",
+  "main": "index.php",
+  "dependencies": {},
+  "devDependencies": {
+    "live-server": "^1.2.1"
+  },
+  "scripts": {
+    "start": "live-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jesushilarioh/Marvel-Comics-Search-API.git"
+  },
+  "keywords": [
+    "marvel"
+  ],
+  "author": "Jesus Hilario H. (Jesus Hilario Hernandez)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jesushilarioh/Marvel-Comics-Search-API/issues"
+  },
+  "homepage": "https://github.com/jesushilarioh/Marvel-Comics-Search-API#readme"
+}

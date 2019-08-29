@@ -1,5 +1,5 @@
 function character() {
-  var urlQueryParameters = new URLSearchParams(window.location.search),
+  let urlQueryParameters = new URLSearchParams(window.location.search),
     queryParameterName = urlQueryParameters.get("name"),
     name = document.getElementById("name").value;
 
@@ -520,4 +520,3 @@ function creatorSingleComic(comicResourceURI) {
 
   xhr.send();
 }
-
